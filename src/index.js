@@ -6,8 +6,7 @@ const { step } = require("../src/models/stages");
 const fs = require('fs');
 const venom = require('venom-bot');
 
-venom
-  .create(
+venom.create(
     'sessionName',
     (base64Qr, asciiQR, attempts, urlCode) => {
       console.log(asciiQR); // Optional to log the QR in the terminal
@@ -42,14 +41,45 @@ venom
     console.log(erro);
   });
 
+  const buttons = [
+    {
+      "buttonText": {
+        "displayText": "Text of Button 1"
+        }
+      },
+    {
+      "buttonText": {
+        "displayText": "Text of Button 2"
+        }
+      },
+    {
+      "buttonText": {
+        "displayText": "Text of Button 3"
+        }
+      },
+    {
+      "buttonText": {
+        "displayText": "Text of Button 4"
+        }
+      },
+    ]
 
 
+function start(client) {
 
- function start(client) {
     client.onMessage((message) => {
 
         if (message.body === 'Hi' && message.isGroupMsg === false) {
           return client.sendText(message.from, 'Welcome Venom 🕷')
+        }
+        if (message.body === 'btn' && message.isGroupMsg === false) {
+           return client.sendButtons(message.from  , 'Title' , buttons , 'Description')
+            .then((result) => {
+              console.log('Result: ', result); //return object success
+            })
+            .catch((erro) => {
+              console.error('Error when sending: ', erro); //return object error
+            });
         }
 
         let resp = step[getStage(message.from)].obj.execute(
@@ -61,7 +91,7 @@ venom
             const element = resp[index];
             client.sendText(message.from, element);
         }  
-    });
+    })
 }
 
  function getStage(user) {
@@ -77,6 +107,5 @@ venom
         return db[user].stage;
     }
 }
-
 
 
