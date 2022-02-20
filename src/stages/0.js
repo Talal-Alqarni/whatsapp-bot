@@ -25,8 +25,7 @@ function execute(user, msg, contato) {
     db[user].stage = 1;
 
     return [
-        menu,
-        `${time}  ${contato} أنا مدير اعمال افتراضي اقوم بالرد عليك نيابة عن مجموعة الغيمة الذكية ، تفضل كيف اقدر اخدمك ؟ `,
+        contato
     ];
 }
 
