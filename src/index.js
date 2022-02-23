@@ -77,9 +77,14 @@ venom.create(
             },
             {
               "buttonText": {
-                "displayText": "تصميم الرد الالي (بوت) للواتساب"
+                "displayText": "برمجة الرد الالي (بوت) للواتساب"
                 }
               },
+              {
+                "buttonText": {
+                  "displayText": "حجز موعد خدمة اخرى"
+                  }
+                },
         ]
 
         const buttonThree = [
@@ -108,20 +113,8 @@ venom.create(
               },
             ]
 
-//  function getStage(user) {
-//   if (db[user]) {
-//       //Se existir esse numero no banco de dados
-//       return db[user].stage;
-//   } else {
-//       //Se for a primeira vez que entra e contato
-//       db[user] = {
-//           stage: 0,
-//           itens: [],
-//       };
-//       return db[user].stage;
-//   }
-// }
 
+let Status = '';
 
 
 function start(client) {
@@ -132,6 +125,22 @@ function start(client) {
         //   return client.sendText(message.from, 'Welcome Venom 🕷')
         // }
 
+
+
+        if (message.body === '#55') {
+            client.sendText(message.from, ' تم تشغيل البوت بنجاح 🤖') 
+            return Status = 'online';
+        }
+
+        if (message.body === '*55') {
+          client.sendText(message.from, ' تم اغلاق البوت بنجاح 👋') 
+          Status = 'offline'
+          return client.stop();
+        }
+
+
+        if (Status === 'online') {
+ 
         if (message.body === '✅') {
           return client.sendButtons(message.from  , 'قائمة الخدمات المقدمة' , buttonTow , 'اختر الخدمة المناسبة لك' )
           .then((result) => {})
@@ -144,7 +153,7 @@ function start(client) {
           .catch((erro) => {});
         }
 
-        if (message.body === 'نعم أحجزلي موعد استشارة' || message.body === 'تصميم وبرمجة المواقع' || message.body === 'تصميم وبرمجة تطبيقات الجوال' || message.body === 'إنشاء و إدارة سيرفرات امازون' || message.body === 'تصميم الرد الالي (بوت) للواتساب' ) {
+        if (message.body === 'نعم أحجزلي موعد استشارة' || message.body === 'تصميم وبرمجة المواقع' || message.body === 'تصميم وبرمجة تطبيقات الجوال' || message.body === 'إنشاء و إدارة سيرفرات امازون' || message.body === 'برمجة الرد الالي (بوت) للواتساب' || message.body === 'حجز موعد خدمة اخرى') {
           return client.sendButtons(message.from  , 'سوف اقوم بحجز موعد لك لتقديم الخدمة' , buttonFore , 'اختر نعم او لا لتأكيد حجز الموعد' )
           .then((result) => {})
           .catch((erro) => {});
@@ -160,25 +169,6 @@ function start(client) {
           return client.sendText(message.from, 'عفوا ، مع السلامة' )
         }
 
-        // if (message.body === 'btn' && message.isGroupMsg === false) {
-        //    return client.sendButtons(message.from  , 'Title' , buttons , 'Description' )
-        //     .then((result) => {
-        //       console.log('Result: ', result); //return object success
-        //     })
-        //     .catch((erro) => {
-        //       console.error('Error when sending: ', erro); //return object error
-        //     });
-        // }
-
-        // if (message.body === '✅' && message.isGroupMsg === false) {
-        //   return client.sendButtons(message.from  , 'اختر ✅ للمتابعة أو ❎ للإلغاء' , button , 'Description')
-        //   .then((result) => {
-        //     console.log('Result: ', result); //return object success
-        //   })
-        //   .catch((erro) => {
-        //     console.error('Error when sending: ', erro); //return object error
-        //   });       
-        //  }
 
           if (message.body) {
             stamp = new Date();
@@ -190,10 +180,7 @@ function start(client) {
             } else if (hours >= 0 && hours < 12) {
                 time = "صباح الخير"
             }
-            // get contact name 
             client.getContact(message.from).then((contact) => {
-              // send the contact name
-              // return client.sendText(message.from, )
 return client.sendButtons(message.from  , ` ${time}  ${contact.name} 
 🤖 أنا مدير اعمال افتراضي اقوم بالرد عليك نيابة عن مجموعة الغيمة الذكية  ،
 تفضل كيف اقدر اخدمك ؟ `
@@ -212,9 +199,21 @@ return client.sendButtons(message.from  , ` ${time}  ${contact.name}
         //     const element = resp[index];
         //     client.sendText(message.from, element);
         // }  
-    })
+
+ 
+        }
+      });
 }
-
-
-// create function to get contact name
-
+//  function getStage(user) {
+//   if (db[user]) {
+//       //Se existir esse numero no banco de dados
+//       return db[user].stage;
+//   } else {
+//       //Se for a primeira vez que entra e contato
+//       db[user] = {
+//           stage: 0,
+//           itens: [],
+//       };
+//       return db[user].stage;
+//   }
+// }
