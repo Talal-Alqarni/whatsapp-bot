@@ -144,19 +144,25 @@ function start(client) {
         if (message.body === '✅') {
           return client.sendButtons(message.from  , 'قائمة الخدمات المقدمة' , buttonTow , 'اختر الخدمة المناسبة لك' )
           .then((result) => {})
-          .catch((erro) => {});
+          .catch((erro) => {
+            console.log(erro)
+          });
         }
 
         if (message.body === '❎') {
           return client.sendButtons(message.from  , 'لديك فكرة مشروع وتحتاج استشارة تقنية ؟' , buttonThree , 'مجموعة الغيمة الذكية ستساعدك بالتأكد من جدوى مشروعك وإختباره قبل إطلاقه' )
           .then((result) => {})
-          .catch((erro) => {});
+          .catch((erro) => {
+            console.log(erro)
+          });
         }
 
         if (message.body === 'نعم أحجزلي موعد استشارة' || message.body === 'تصميم وبرمجة المواقع' || message.body === 'تصميم وبرمجة تطبيقات الجوال' || message.body === 'إنشاء و إدارة سيرفرات امازون' || message.body === 'برمجة الرد الالي (بوت) للواتساب' || message.body === 'حجز موعد خدمة اخرى') {
           return client.sendButtons(message.from  , 'سوف اقوم بحجز موعد لك لتقديم الخدمة' , buttonFore , 'اختر نعم او لا لتأكيد حجز الموعد' )
           .then((result) => {})
-          .catch((erro) => {});
+          .catch((erro) => {
+            console.log(erro)
+          });
         }
 
         if (message.body === 'نعم اريد تاكيد حجز الموعد') {
@@ -186,8 +192,10 @@ return client.sendButtons(message.from  , ` ${time}  ${contact.name}
 تفضل كيف اقدر اخدمك ؟ `
  , buttonOne ,`اختر ✔️ لعرض  قائمة الخدمات المتوفرة 
 اختر ✖️ للإلغاء`)
+            }
+            ).catch((err) => {
+              console.log(err)
             });
-
           }
 
         // let resp = step[getStage(message.from)].obj.execute(
